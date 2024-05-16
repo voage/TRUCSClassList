@@ -9,6 +9,7 @@ import { useState } from "react";
 function App() {
   // State to keep track of the selected node
   const [selectedNode, setSelectedNode] = useState<Course | null>(null);
+  const [detailNodeVisible, setDetailNodeVisible] = useState<boolean>(true);
 
   // Function to handle node selection
   const handleNodeSelect = (event: React.MouseEvent, node: Node) => {
@@ -16,6 +17,12 @@ function App() {
     const selectedCourse = courseData.find((course) => course.code === node.id);
     // Update the selectedNode state
     setSelectedNode(selectedCourse || null);
+    setDetailNodeVisible(true);
+  };
+
+  // Function to toggle visibility of the detail node
+  const toggleDetailNodeVisibility = () => {
+    setDetailNodeVisible(!detailNodeVisible);
   };
 
   console.log(courseData);
@@ -96,7 +103,7 @@ function App() {
   // Div to show course details
 
   const DetailNode = () => {
-    if (!selectedNode) return null;
+    if (!selectedNode || !detailNodeVisible) return null;
 
     return (
       <div className="w-1/4 rounded-md flex flex-col p-4 ">
@@ -113,6 +120,12 @@ function App() {
         <p>
           <strong>Prerequisites:</strong> {selectedNode.prereq}
         </p>
+        <button
+          className="border rounded-md p-4 my-4 bg-slate-500 hover:bg-slate-700"
+          onClick={toggleDetailNodeVisibility}
+        >
+          Close
+        </button>
       </div>
     );
   };
@@ -121,12 +134,7 @@ function App() {
     <div style={{ fontFamily: "'Poppins', sans-serif " }}>
       <Header />
       <div className="w-full h-screen flex gap-2 ">
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          zoomOnScroll={false}
-          onNodeClick={handleNodeSelect}
-        >
+        <ReactFlow nodes={nodes} edges={edges} onNodeClick={handleNodeSelect}>
           <Controls />
         </ReactFlow>
         <DetailNode />
