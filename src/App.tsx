@@ -7,6 +7,17 @@ import "reactflow/dist/style.css";
 import { useState } from "react";
 
 function App() {
+  // State to keep track of the selected node
+  const [selectedNode, setSelectedNode] = useState<Course | null>(null);
+
+  // Function to handle node selection
+  const handleNodeSelect = (event: React.MouseEvent, node: Node) => {
+    // Find the course data corresponding to the selected node
+    const selectedCourse = courseData.find((course) => course.code === node.id);
+    // Update the selectedNode state
+    setSelectedNode(selectedCourse || null);
+  };
+
   console.log(courseData);
 
   // Interfaces
@@ -82,11 +93,34 @@ function App() {
 
   const { nodes, edges } = createNodes(courseData);
 
+  // Div to show course details
+
+  const DetailNode = () => {
+    if (!selectedNode) return null;
+
+    return (
+      <div className="w-1/4 rounded-md flex flex-col p-4 ">
+        <h2 className="text-xl font-semibold">{selectedNode.title}</h2>
+        <p>
+          <strong>Code:</strong> {selectedNode.code}
+        </p>
+        <p>
+          <strong>Credits:</strong> {selectedNode.credits}
+        </p>
+        <p>
+          <strong>Description:</strong> {selectedNode.description}
+        </p>
+        <p>
+          <strong>Prerequisites:</strong> {selectedNode.prereq}
+        </p>
+      </div>
+    );
+  };
 
   return (
     <div style={{ fontFamily: "'Poppins', sans-serif " }}>
       <Header />
-      <div className="w-full h-screen flex ">
+      <div className="w-full h-screen flex gap-2 ">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -95,6 +129,7 @@ function App() {
         >
           <Controls />
         </ReactFlow>
+        <DetailNode />
       </div>
       <Footer />
     </div>
