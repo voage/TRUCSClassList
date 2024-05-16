@@ -53,9 +53,10 @@ function App() {
     const nodes: Node[] = [];
     const edges: Edge[] = [];
 
-    const columnCount = 8; // Number of columns in the grid
-    const x = 100; // Initial x position
-    const y = 100; // Initial y position
+    const columnCount = 8;
+    //initial positions
+    const x = 100;
+    const y = 100;
 
     data.forEach((course, index) => {
       // Calculate x and y positions based on index and columnCount
@@ -64,11 +65,11 @@ function App() {
 
       // Set position for the current node
       const position = {
-        x: x + columnIndex * 200, // Adjust the spacing between columns as needed
-        y: y + rowIndex * 100, // Adjust the spacing between rows as needed
+        x: x + columnIndex * 200,
+        y: y + rowIndex * 100,
       };
 
-      // Create node and push to nodes array
+      // Create node
       const node: Node = {
         id: course.code,
         type: "default",
@@ -76,6 +77,9 @@ function App() {
         position,
         draggable: false,
         dragging: false,
+        style: {
+          background: "#9CA3AF",
+        },
       };
 
       nodes.push(node);
@@ -87,7 +91,7 @@ function App() {
           prereqMatches.forEach((prereq) => {
             edges.push({
               id: `${course.code}-${prereq}`,
-              source: prereq.trim(), // Trim to remove whitespace
+              source: prereq.trim(),
               target: course.code,
             });
           });
