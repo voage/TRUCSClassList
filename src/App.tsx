@@ -3,11 +3,14 @@ import Footer from "./components/Footer.jsx";
 import "./index.css";
 import ReactFlow, { Background, Controls, MiniMap } from "reactflow";
 import courseData from "./com-courses.json";
-
 import "reactflow/dist/style.css";
+import { useState } from "react";
 
 function App() {
   console.log(courseData);
+
+  // Interfaces
+
   interface Course {
     code: string;
     title: string;
@@ -16,11 +19,25 @@ function App() {
     prereq: string;
   }
 
-  const transformDataToNodes = (data: Course[]): Node[] => {
+  interface Edge {
+    id: string;
+    source: string;
+    target: string;
+  }
+
+  interface GraphData {
+    nodes: Node[];
+    edges: Edge[];
+  }
+  // Generate nodes
+
+  const createNodes = (data: Course[]): GraphData => {
     const nodes: Node[] = [];
-    const columnCount = 7; // Number of columns in the grid
-    let x = 100; // Initial x position
-    let y = 100; // Initial y position
+    const edges: Edge[] = [];
+
+    const columnCount = 8; // Number of columns in the grid
+    const x = 100; // Initial x position
+    const y = 100; // Initial y position
 
     data.forEach((course, index) => {
       // Calculate x and y positions based on index and columnCount
@@ -29,8 +46,8 @@ function App() {
 
       // Set position for the current node
       const position = {
-        x: x + columnIndex * 300, // Adjust the spacing between columns as needed
-        y: y + rowIndex * 200, // Adjust the spacing between rows as needed
+        x: x + columnIndex * 200, // Adjust the spacing between columns as needed
+        y: y + rowIndex * 100, // Adjust the spacing between rows as needed
       };
 
       // Create node and push to nodes array
@@ -39,22 +56,43 @@ function App() {
         type: "default",
         data: { label: course.code },
         position,
-        dragHandle: false,
+        draggable: false,
         dragging: false,
       };
 
       nodes.push(node);
+
+      if (course.prereq) {
+        // Extract prerequisite codes
+        const prereqMatches = course.prereq.match(/[A-Z]{4} \d{4}/g);
+        if (prereqMatches) {
+          prereqMatches.forEach((prereq) => {
+            edges.push({
+              id: `${course.code}-${prereq}`,
+              source: prereq.trim(), // Trim to remove whitespace
+              target: course.code,
+            });
+          });
+        }
+      }
     });
 
-    return nodes;
+    return { nodes, edges };
   };
 
-  const nodes: Node[] = transformDataToNodes(courseData);
+  const { nodes, edges } = createNodes(courseData);
+
+
   return (
     <div style={{ fontFamily: "'Poppins', sans-serif " }}>
       <Header />
-      <div style={{ width: "100vw", height: "200vh" }}>
-        <ReactFlow nodes={nodes} fitView>
+      <div className="w-full h-screen flex ">
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          zoomOnScroll={false}
+          onNodeClick={handleNodeSelect}
+        >
           <Controls />
         </ReactFlow>
       </div>
