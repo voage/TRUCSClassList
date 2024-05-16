@@ -2,14 +2,20 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="bg-[#222831]">
-      <h1 className="text-white text-md">
+    <div className="bg-[#151515] py-6 pl-8 fixed bottom-0 min-w-full ">
+      <h1 className="text-white text-lg">
         Made By{"  "}
-        <a className="text-emerald-300" href="https://github.com/rupokghosh">
+        <a
+          className="text-zinc-400 hover:underline"
+          href="https://github.com/rupokghosh"
+        >
           Rupok Adin
         </a>
         {"  "} and{"  "}
-        <a className="text-blue-300" href="https://github.com/amrikmalhans">
+        <a
+          className="text-zinc-400 hover:underline"
+          href="https://github.com/amrikmalhans"
+        >
           Amrik Malhans
         </a>
       </h1>
