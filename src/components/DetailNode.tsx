@@ -20,7 +20,7 @@ function DetailNode({
   if (!selectedNode || !detailNodeVisible) return null;
 
   return (
-    <div className="w-1/4 rounded-md flex flex-col p-4">
+    <div className="w-1/4 rounded-md flex flex-col p-4 overflow-y-auto">
       <h2 className="text-xl font-semibold">{selectedNode.title}</h2>
       <p>
         <strong>Code:</strong> {selectedNode.code}
