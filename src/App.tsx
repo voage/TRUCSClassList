@@ -72,7 +72,7 @@ function App() {
 
     const columnCount = 8;
     //initial positions
-    const x = 100;
+    const x = 50;
     const y = 100;
 
     data.forEach((course, index) => {
@@ -82,7 +82,7 @@ function App() {
 
       // Set position for the current node
       const position = {
-        x: x + columnIndex * 200,
+        x: x + columnIndex * 175,
         y: y + rowIndex * 100,
       };
 
@@ -95,9 +95,12 @@ function App() {
         draggable: false,
         dragging: false,
         style: {
+          fontWeight: "600",
+          color: "white",
+          borderRadius: "0.5rem",
           background: highlightedNodes.includes(course.code)
-            ? "red"
-            : "#9CA3AF",
+            ? "#607274"
+            : "#222831",
         },
       };
 
@@ -115,8 +118,8 @@ function App() {
               animated: highlightedEdges.includes(`${course.code}-${prereq}`),
               style: {
                 stroke: highlightedEdges.includes(`${course.code}-${prereq}`)
-                  ? "red"
-                  : "#000",
+                  ? "#FF2E63"
+                  : "#50727B",
               },
             });
           });
