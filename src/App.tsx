@@ -15,7 +15,7 @@ function App() {
   const [highlightedEdges, setHighlightedEdges] = useState<string[]>([]);
 
   // Function to handle node selection
-  const handleNodeSelect = (event: React.MouseEvent, node: Node) => {
+  const handleNodeSelect = (_event: React.MouseEvent, node: Node) => {
     // Find the course data corresponding to the selected node
     const selectedCourse = courseData.find((course) => course.code === node.id);
     setSelectedNode(selectedCourse || null);
@@ -55,6 +55,18 @@ function App() {
     id: string;
     source: string;
     target: string;
+    animated?: boolean;
+    style?: React.CSSProperties;
+  }
+
+  interface Node {
+    id: string;
+    type: string;
+    data: { label: string };
+    position?: { x: number; y: number };
+    draggable?: boolean;
+    dragging?: boolean;
+    style?: React.CSSProperties;
   }
 
   interface GraphData {
@@ -127,7 +139,10 @@ function App() {
     return { nodes, edges };
   };
 
-  const { nodes, edges } = createNodes(courseData);
+  const { nodes, edges } = createNodes(courseData) as {
+    nodes: Node[];
+    edges: Edge[];
+  };
 
   return (
     <div style={{ fontFamily: "'Poppins', sans-serif " }}>
