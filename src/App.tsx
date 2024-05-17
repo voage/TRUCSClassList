@@ -11,6 +11,8 @@ function App() {
   // State to keep track of the selected node
   const [selectedNode, setSelectedNode] = useState<Course | null>(null);
   const [detailNodeVisible, setDetailNodeVisible] = useState<boolean>(true);
+  const [highlightedNodes, setHighlightedNodes] = useState<string[]>([]);
+  const [highlightedEdges, setHighlightedEdges] = useState<string[]>([]);
 
   // Function to handle node selection
   const handleNodeSelect = (event: React.MouseEvent, node: Node) => {
@@ -19,6 +21,20 @@ function App() {
     // Update the selectedNode state
     setSelectedNode(selectedCourse || null);
     setDetailNodeVisible(true);
+
+    const linkedNodes = new Set<string>();
+    const linkedEdges: string[] = [];
+
+    edges.forEach((edge) => {
+      if (edge.source === node.id || edge.target === node.id) {
+        linkedEdges.push(edge.id);
+        linkedNodes.add(edge.source);
+        linkedNodes.add(edge.target);
+      }
+    });
+
+    setHighlightedNodes(Array.from(linkedNodes));
+    setHighlightedEdges(linkedEdges);
   };
 
   // Function to toggle visibility of the detail node
@@ -79,7 +95,9 @@ function App() {
         draggable: false,
         dragging: false,
         style: {
-          background: "#9CA3AF",
+          background: highlightedNodes.includes(course.code)
+            ? "red"
+            : "#9CA3AF",
         },
       };
 
@@ -94,6 +112,12 @@ function App() {
               id: `${course.code}-${prereq}`,
               source: prereq.trim(),
               target: course.code,
+              animated: highlightedEdges.includes(`${course.code}-${prereq}`),
+              style: {
+                stroke: highlightedEdges.includes(`${course.code}-${prereq}`)
+                  ? "red"
+                  : "#000",
+              },
             });
           });
         }
