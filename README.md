@@ -4,6 +4,8 @@ This project is a React application designed to
 visualize course data in a graphical format using ReactFlow library.
 This app allows users to explore courses and their dependencies through an interactive graph.
 
+![Screenshot](image.png)
+
 ## Features
 
 - Visual representation of courses and their dependencies.
