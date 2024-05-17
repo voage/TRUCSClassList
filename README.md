@@ -1,30 +1,40 @@
-# React + TypeScript + Vite
+# TRU Computer Science Course Graph
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React application designed to
+visualize course data in a graphical format using ReactFlow library.
+This app allows users to explore courses and their dependencies through an interactive graph.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Visual representation of courses and their dependencies.
+- Click on a course node to view its details.
+- Toggle visibility of the detail node for a selected course.
+- Responsive design for different screen sizes.
 
-## Expanding the ESLint configuration
+## Usage
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Use the mouse to interact with the graph.
+- Click on a course node to view its details.
+- Toggle visibility of the detail node by clicking on it.
+- Explore the graph to understand course dependencies.
 
-- Configure the top-level `parserOptions` property like this:
+## Installation 
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+1. Clone the repo:
+```bash
+  git clone https://github.com/voage/TRUCSClassList.git
 ```
+2. Navigate to the project directory & install dependencies:
+```bash
+  cd course-visualization-app
+  npm install
+```
+3. Run the development server:
+```bash 
+  npm run dev
+```
+4.  Open http://localhost:3000 in your browser to view the app.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Contributing
+
+Contributions are welcome! If you have a feature request, enhancement suggestion, or found a bug, please create an issue first to discuss it.
