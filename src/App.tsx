@@ -73,7 +73,7 @@ function App() {
     const columnCount = 8;
     //initial positions
     const x = 50;
-    const y = 100;
+    const y = 0;
 
     data.forEach((course, index) => {
       // Calculate x and y positions based on index and columnCount
@@ -135,6 +135,7 @@ function App() {
   return (
     <div style={{ fontFamily: "'Poppins', sans-serif " }}>
       <Header />
+
       <div className="w-full h-screen flex gap-2 ">
         <ReactFlow nodes={nodes} edges={edges} onNodeClick={handleNodeSelect}>
           <Controls />

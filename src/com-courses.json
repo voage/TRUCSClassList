@@ -130,7 +130,7 @@
     "title": "Computer Programming 2 (3,1,0)",
     "credits": "3 credits",
     "description": "This course is a continuation of COMP 1130 and provides a foundation for further studies in computing science. The objectives are to introduce object oriented programming and continue to develop a disciplined approach to the design, coding and testing of programs. In a laboratory setting, through critical thinking and investigation, students will iteratively design and build a variety of applications to reinforce learning and develop real world competency in Computer. This course is for students who plan to take further courses in Computing Science or to learn basic Object Oriented programming concepts.",
-    "prereq": ""
+    "prereq": "COMP 1130"
   },
   {
     "code": "COMP 1231",
