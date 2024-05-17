@@ -18,10 +18,10 @@ function App() {
   const handleNodeSelect = (event: React.MouseEvent, node: Node) => {
     // Find the course data corresponding to the selected node
     const selectedCourse = courseData.find((course) => course.code === node.id);
-    // Update the selectedNode state
     setSelectedNode(selectedCourse || null);
     setDetailNodeVisible(true);
 
+    // logic to highlight selected node and all edges/nodes its connected to
     const linkedNodes = new Set<string>();
     const linkedEdges: string[] = [];
 
@@ -42,10 +42,7 @@ function App() {
     setDetailNodeVisible(!detailNodeVisible);
   };
 
-  console.log(courseData);
-
   // Interfaces
-
   interface Course {
     code: string;
     title: string;
@@ -64,16 +61,15 @@ function App() {
     nodes: Node[];
     edges: Edge[];
   }
-  // Generate nodes
 
+  // Generating nodes from json data
   const createNodes = (data: Course[]): GraphData => {
     const nodes: Node[] = [];
     const edges: Edge[] = [];
 
-    const columnCount = 8;
-    //initial positions
+    const columnCount = 8; // no. of columns and initial positions of the nodes
     const x = 50;
-    const y = 0;
+    const y = 75;
 
     data.forEach((course, index) => {
       // Calculate x and y positions based on index and columnCount
@@ -106,6 +102,7 @@ function App() {
 
       nodes.push(node);
 
+      //logic to generate the edges based on prereqs
       if (course.prereq) {
         // Extract prerequisite codes
         const prereqMatches = course.prereq.match(/[A-Z]{4} \d{4}/g);
