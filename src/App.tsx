@@ -2,7 +2,7 @@ import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
 import DetailNode from "./components/DetailNode.tsx";
 import "./index.css";
-import ReactFlow, { Controls } from "reactflow";
+import ReactFlow, { Controls, Node, Edge } from "reactflow";
 import courseData from "./com-courses.json";
 import "reactflow/dist/style.css";
 import { useState } from "react";
@@ -49,24 +49,6 @@ function App() {
     credits: string;
     description: string;
     prereq: string;
-  }
-
-  interface Edge {
-    id: string;
-    source: string;
-    target: string;
-    animated?: boolean;
-    style?: React.CSSProperties;
-  }
-
-  interface Node {
-    id: string;
-    type: string;
-    data: { label: string };
-    position?: { x: number; y: number };
-    draggable?: boolean;
-    dragging?: boolean;
-    style?: React.CSSProperties;
   }
 
   interface GraphData {
