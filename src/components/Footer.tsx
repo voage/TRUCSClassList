@@ -1,8 +1,6 @@
-import React from "react";
-
 const Footer = () => {
   return (
-    <div className="bg-[#151515] py-6 pl-8 fixed bottom-0 min-w-full ">
+    <div className="bg-[#151515] py-6 pl-8 bottom-0 min-w-full ">
       <h1 className="text-white text-lg">
         Made By{"  "}
         <a
